@@ -85,3 +85,4 @@ app.use((err,req,res,next) => {
     const { StatusCode = 500 , message = "Something has gone wrong" } = err;
     res.status(StatusCode).render('error',{err})
 })
+
