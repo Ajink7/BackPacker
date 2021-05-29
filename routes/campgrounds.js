@@ -8,12 +8,17 @@ const {campgroundSchema } = require('../schemas')
 const Campground = require('../models/campground');
 const { isLoggedIn , isOwner ,viewcampground } = require('../middleware')
 const campgrounds = require('../controllers/campground')
-
+const multer = require('multer')
+const {storage} = require('../cloudinary/index')
+const upload = multer({ storage })
 
 router.route('/')
     .get(catchAsync(campgrounds.allCampgrounds))
-    .post(isLoggedIn,viewcampground, catchAsync(campgrounds.newCampground))
-
+    .post(isLoggedIn,upload.array('image'),viewcampground, catchAsync(campgrounds.newCampground))
+    // .post(upload.array('image'),(req,res) => {
+    //     console.log(req.body,req.file)
+    //     res.send(req.body)
+    // })
 router.get('/new',isLoggedIn,campgrounds.renderForm )
 
 router.route('/:id')
