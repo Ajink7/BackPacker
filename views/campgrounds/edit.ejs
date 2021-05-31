@@ -7,7 +7,7 @@
 
     <h1 class="text-center">Edit Campground</h1>
     <div class="col-6 offset-3">
-        <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST" novalidate class="validated-form">
+        <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
             <div class='mb-3'>
                 <label class="form-label" for="title">Title</label>
                 <input value= '<%= campground.title %>' class="form-control" type="text" id="title" name="campground[title]"  required >
@@ -22,13 +22,12 @@
                     Looks good!
                   </div>
             </div> 
-            <div class='mb-3'>
-                <label class="form-label" for="image">image url</label>
-                <input class="form-control" value="<%= campground.image %>" type="text" id="image" name="campground[image]" required >
-                <div class="valid-feedback">
-                    Looks good!
-                  </div>
-            </div>  
+            <!-- <div class='mb-3 custom-file'>
+                <label class="form-label custom-file-label" for="image">Add Images</label>
+                <input type="file" name="image" id="image" multiple>
+                
+            </div>   -->
+           
             <div class="mb-3">
                 <label class="form-label" for="price">Price </label>
                 <div class="input-group mb-3">
@@ -47,6 +46,20 @@
                     Looks good!
                   </div>
             </div> 
+            <div class="mb-3 input-group custom-file">
+                <input type="file" name="image" class="form-control" id="image"  aria-label="Upload" multiple>
+            </div>
+            <div class="mb-3">
+                <% campground.images.forEach(function (img,i) { %>
+                    <img src="<%= img.thumbnail %> " class="img-thumbnail" alt="">
+                    <div class="form-check">
+                        <label for="image- <%= i %> ">Delete?</label>    
+                        <input type="checkbox" id="image- <%= i %> " name="deleteImages[]" value="<%= img.filename %>">
+                        
+                    </div>
+                   
+                <% } )%>  
+            </div>
             <div class="mb-3">
                 <button class="btn btn-info">Edit Campground</button>
             </div> 
