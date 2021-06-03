@@ -34,6 +34,10 @@ const seedDB = async () => {
                         {  
                         "url" : "https://res.cloudinary.com/divgbey8i/image/upload/v1622271242/campground-images/mlmq9apcd071ygdukt51.png", 
                         "filename" : "campground-images/mlmq9apcd071ygdukt51" } ],
+            "geometry" : {
+                "type" : "Point",
+                "coordinates" : [ 76.5740323493548, 10.20060295315 ] 
+            },
             description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad, deserunt quod, harum sed nulla adipisci dolores repudiandae libero est sint maiores placeat consequuntur, rerum dignissimos quia fuga. Distinctio, repudiandae architecto.',
             price: price,
             author: '60a54f7531ae1645f127722e'
