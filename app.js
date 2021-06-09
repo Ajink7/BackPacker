@@ -25,14 +25,24 @@ const flash = require('connect-flash')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require('./models/user')
-mongoose.connect('mongodb://localhost:27017/yelp-camp', { 
+const MongoDBStore = require('connect-mongo')
+const dbUrl = process.env.DB_USER//'mongodb://localhost:27017/yelp-camp'
+mongoose.connect(dbUrl, { 
     useNewUrlParser: true,
     useUnifiedTopology: true ,
     useCreateIndex: true,
     useFindAndModify : false
 })
   
+const store = MongoDBStore.create({
+    mongoUrl: dbUrl,
+    secret: "Secret",
+    touchAfter: 24*3600,
+});
+
 const sessionConfig = {
+    store: store,
+    name: 'session',
     secret: 'thisisnotagoodsecret',
     saveUninitialized: true,
     resave: false ,
