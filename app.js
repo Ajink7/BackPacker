@@ -18,7 +18,8 @@ const Review = require('./models/review')
 const campgroundRoutes = require('./routes/campgrounds')
 const reviewRoutes = require('./routes/reviews')
 const userRoutes = require('./routes/users')
-
+const helmet = require('helmet')
+const mongoSanitize = require('express-mongo-sanitize')
 const session = require('express-session')
 const flash = require('connect-flash')
 const passport = require('passport')
@@ -51,14 +52,14 @@ app.engine('ejs',ejsMate)
 app.use(express.urlencoded({extended: true}))
 app.use(methodOverride('_method'))
 app.use(session(sessionConfig))
-
+app.use(helmet({contentSecurityPolicy:false}))
 app.use(passport.initialize())
 app.use(passport.session())
 passport.use(new LocalStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
-
+app.use(mongoSanitize())
 
 app.set('view engine','ejs')
 app.set('views',path.join(__dirname,'views'))
