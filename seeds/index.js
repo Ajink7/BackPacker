@@ -3,7 +3,7 @@ const cities = require('./cities');
 const { places, descriptors } = require('./seedHelpers');
 const Campground = require('../models/campground');
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp', {
+mongoose.connect('mongodb+srv://Ajink7:TuB5og1erSzihWeM@cluster0.xnbiy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true
@@ -20,8 +20,8 @@ const sample = array => array[Math.floor(Math.random() * array.length)];
 
 
 const seedDB = async () => {
-    await Campground.deleteMany({});
-    for (let i = 0; i < 300; i++) {
+    //await Campground.deleteMany({});
+    for (let i = 0; i < 5; i++) {
         const random1000 = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 30) + 10;
 
@@ -40,7 +40,7 @@ const seedDB = async () => {
             },
             description: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad, deserunt quod, harum sed nulla adipisci dolores repudiandae libero est sint maiores placeat consequuntur, rerum dignissimos quia fuga. Distinctio, repudiandae architecto.',
             price: price,
-            author: '60a54f7531ae1645f127722e'
+            author: '60c09127b9c6d62d2d2e4531'
         })
         await camp.save();
     }
@@ -49,3 +49,6 @@ const seedDB = async () => {
 seedDB().then(() => {
     mongoose.connection.close();
 })
+
+
+
